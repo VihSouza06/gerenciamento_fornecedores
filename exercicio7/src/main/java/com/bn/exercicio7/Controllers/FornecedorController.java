@@ -1,7 +1,6 @@
 package com.bn.exercicio7.Controllers;
 
 import com.bn.exercicio7.Models.FornecedorModel;
-import com.bn.exercicio7.Repositories.FornecedorRepository;
 import com.bn.exercicio7.Services.FornecedorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -20,13 +19,14 @@ public class FornecedorController {
 
     @GetMapping
     public ResponseEntity<List<FornecedorModel>> findAll(){
-        List<FornecedorModel> fornecedor = fornecedorService.findAll();
-        return ResponseEntity.ok().body(fornecedor);
+        List<FornecedorModel> fornecedores = fornecedorService.findAll();
+        return ResponseEntity.ok().body(fornecedores);
     }
 
     @GetMapping("/{id}")
-    public FornecedorModel buscarFornecedorPorId(@PathVariable Long id){
-        return fornecedorService.buscarFornecedorPorId(id);
+    public ResponseEntity<FornecedorModel> buscarFornecedorPorId(@PathVariable Long id){
+        FornecedorModel fornecedor = fornecedorService.buscarFornecedorPorId(id);
+        return ResponseEntity.ok(fornecedor);
     }
 
     @PostMapping
